@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Вики Модпака Minecraft</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #121212;
+            color: #eaeaea;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            background-color: #1e1e1e;
+            padding: 20px 0;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+        }
+        
+        .header-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #4CAF50;
+        }
+        
+        .tab-container {
+            background-color: #1e1e1e;
+            border-radius: 8px;
+            overflow: hidden;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .tabs {
+            display: flex;
+            overflow-x: auto;
+            border-bottom: 2px solid #2e2e2e;
+            background-color: #252525;
+        }
+        
+        .tab-btn {
+            padding: 15px 25px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: #aaa;
+            font-size: 16px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            min-width: max-content;
+        }
+        
+        .tab-btn:hover {
+            background-color: #333;
+            color: #fff;
+        }
+        
+        .tab-btn.active {
+            background-color: #4CAF50;
+            color: white;
+        }
+        
+        .tab-content {
+            display: none;
+            padding: 25px;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        h1, h2, h3 {
+            margin-bottom: 15px;
+            color: #4CAF50;
+        }
+        
+        p {
+            margin-bottom: 15px;
+        }
+        
+        .mod-card {
+            background-color: #252525;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease;
+        }
+        
+        .mod-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .mod-title {
+            font-size: 20px;
+            margin-bottom: 10px;
+            color: #4CAF50;
+        }
+        
+        .mod-info {
+            display: flex;
+            margin-bottom: 15px;
+        }
+        
+        .mod-image {
+            width: 80px;
+            height: 80px;
+            background-color: #333;
+            border-radius: 4px;
+            margin-right: 15px;
+            overflow: hidden;
+        }
+        
+        .mod-details {
+            flex: 1;
+        }
+        
+        .mod-description {
+            color: #ccc;
+        }
+        
+        footer {
+            margin-top: 40px;
+            padding: 20px 0;
+            text-align: center;
+            background-color: #1a1a1a;
+            color: #777;
+            font-size: 14px;
+        }
+        
+        code {
+            background-color: #2a2a2a;
+            padding: 2px 5px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+        }
+        
+        ul, ol {
+            margin-left: 20px;
+            margin-bottom: 15px;
+        }
+        
+        img {
+            max-width: 100%;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container header-content">
+            <div class="logo">МайнкрафтМодпак Вики</div>
+        </div>
+    </header>
+    
+    <div class="container">
+        <div class="tab-container">
+            <div class="tabs">
+                <button class="tab-btn active" onclick="openTab('home')">Главная</button>
+                <button class="tab-btn" onclick="openTab('getting-started')">Начало работы</button>
+                <button class="tab-btn" onclick="openTab('tech-mods')">Технические моды</button>
+                <button class="tab-btn" onclick="openTab('magic-mods')">Магические моды</button>
+                <button class="tab-btn" onclick="openTab('utility-mods')">Утилиты</button>
+                <button class="tab-btn" onclick="openTab('installation')">Установка</button>
+            </div>
+            
+            <div id="home" class="tab-content active">
+                <h1>Добро пожаловать в вики нашего модпака!</h1>
+                <p>Здесь вы найдете подробные руководства по всем модам, входящим в состав пакета, советы по использованию и решения распространенных проблем.</p>
+                
+                <h2>О модпаке</h2>
+                <p>Наш модпак сочетает технические и магические моды, предоставляя разнообразный игровой опыт для любителей как автоматизации и механизмов, так и магических приключений.</p>
+                
+                <h2>Популярные моды</h2>
+                <div class="mod-card">
+                    <div class="mod-title">Applied Energistics 2</div>
+                    <div class="mod-info">
+                        <div class="mod-image">
+                            <img src="/api/placeholder/80/80" alt="Applied Energistics 2" />
+                        </div>
+                        <div class="mod-details">
+                            <p class="mod-description">Система хранения и автоматизации, основанная на энергии и материи. Позволяет создать цифровую сеть хранения предметов.</p>
+                        </div>
+                    </div>
+                    <button onclick="openTab('tech-mods')">Подробнее</button>
+                </div>
+                
+                <div class="mod-card">
+                    <div class="mod-title">Botania</div>
+                    <div class="mod-info">
+                        <div class="mod-image">
+                            <img src="/api/placeholder/80/80" alt="Botania" />
+                        </div>
+                        <div class="mod-details">
+                            <p class="mod-description">Технологическая магия с использованием цветов и природной маны. Предлагает уникальные механики автоматизации.</p>
+                        </div>
+                    </div>
+                    <button onclick="openTab('magic-mods')">Подробнее</button>
+                </div>
+            </div>
+            
+            <div id="getting-started" class="tab-content">
+                <h1>Начало работы с модпаком</h1>
+                <p>В этом разделе мы рассмотрим основы использования модпака и первые шаги, которые следует предпринять после установки.</p>
+                
+                <h2>Первый день</h2>
+                <p>После создания мира рекомендуется выполнить следующие действия:</p>
+                <ol>
+                    <li>Соберите дерево и создайте базовые инструменты</li>
+                    <li>Найдите безопасное место для базы</li>
+                    <li>Добудьте начальные ресурсы (уголь, железо)</li>
+                    <li>Создайте первый генератор энергии (если используются технические моды)</li>
+                </ol>
+                
+                <h2>Интерфейсы и управление</h2>
+                <p>Модпак добавляет несколько новых элементов интерфейса и клавиш управления:</p>
+                <ul>
+                    <li><code>JEI</code> - просмотр рецептов (клавиша <code>R</code> при наведении на предмет)</li>
+                    <li><code>Minimap</code> - миникарта в углу экрана (настройки по клавише <code>M</code>)</li>
+                    <li><code>Inventory Tweaks</code> - сортировка инвентаря (клавиша <code>Middle Mouse</code>)</li>
+                </ul>
+            </div>
+            
+            <div id="tech-mods" class="tab-content">
+                <h1>Технические моды</h1>
+                <p>В этом разделе представлены все технические моды пакета с подробными руководствами.</p>
+                
+                <div class="mod-card">
+                    <div class="mod-title">Applied Energistics 2</div>
+                    <div class="mod-info">
+                        <div class="mod-image">
+                            <img src="/api/placeholder/80/80" alt="Applied Energistics 2" />
+                        </div>
+                        <div class="mod-details">
+                            <p class="mod-description">Система хранения и автоматизации, основанная на энергии и материи.</p>
+                        </div>
+                    </div>
+                    
+                    <h3>Начало работы с AE2</h3>
+                    <p>Для начала работы с Applied Energistics 2 вам понадобится:</p>
+                    <ol>
+                        <li>Найти метеориты с прессованными материалами и кристаллами</li>
+                        <li>Создать зарядник и ME контроллер</li>
+                        <li>Начать выращивание чистых кристаллов</li>
+                    </ol>
+                    
+                    <h3>Основные компоненты</h3>
+                    <ul>
+                        <li><strong>ME Drive</strong> - хранилище для ячеек</li>
+                        <li><strong>Storage Cells</strong> - ячейки для хранения предметов</li>
+                        <li><strong>ME Terminal</strong> - интерфейс доступа к сети</li>
+                        <li><strong>ME Controller</strong> - управляющий элемент для больших сетей</li>
+                    </ul>
+                </div>
+                
+                <div class="mod-card">
+                    <div class="mod-title">Industrial Craft 2</div>
+                    <div class="mod-info">
+                        <div class="mod-image">
+                            <img src="/api/placeholder/80/80" alt="Industrial Craft 2" />
+                        </div>
+                        <div class="mod-details">
+                            <p class="mod-description">Классический технический мод с электрическими механизмами, генераторами и инструментами.</p>
+                        </div>
+                    </div>
+                    
+                    <h3>Энергетическая система</h3>
+                    <p>IC2 использует свою систему энергии - EU (Energy Units):</p>
+                    <ul>
+                        <li>Генераторы: солнечные панели, ветряные мельницы, генераторы на угле</li>
+                        <li>Хранение: батареи и MFSU</li>
+                        <li>Передача: медные и стеклянно-волоконные кабели</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div id="magic-mods" class="tab-content">
+                <h1>Магические моды</h1>
+                <p>Здесь представлены все магические моды пакета и руководства по их использованию.</p>
+                
+                <div class="mod-card">
+                    <div class="mod-title">Botania</div>
+                    <div class="mod-info">
+                        <div class="mod-image">
+                            <img src="/api/placeholder/80/80" alt="Botania" />
+                        </div>
+                        <div class="mod-details">
+                            <p class="mod-description">Природная магия, основанная на цветах и мане.</p>
+                        </div>
+                    </div>
+                    
+                    <h3>Начало работы с Botania</h3>
+                    <p>Для начала вам потребуется:</p>
+                    <ol>
+                        <li>Создать Лексику Botania</li>
+                        <li>Вырастить мистические цветы</li>
+                        <li>Создать алтарь маны</li>
+                        <li>Настроить систему генерации и сбора маны</li>
+                    </ol>
+                    
+                    <h3>Основные механики</h3>
+                    <ul>
+                        <li><strong>Мана</strong> - основной ресурс мода</li>
+                        <li><strong>Generating Flowers</strong> - цветы для создания маны</li>
+                        <li><strong>Functional Flowers</strong> - цветы для выполнения различных функций</li>
+                        <li><strong>Spreaders</strong> - передатчики маны</li>
+                    </ul>
+                </div>
+                
+                <div class="mod-card">
+                    <div class="mod-title">Thaumcraft</div>
+                    <div class="mod-info">
+                        <div class="mod-image">
+                            <img src="/api/placeholder/80/80" alt="Thaumcraft" />
+                        </div>
+                        <div class="mod-details">
+                            <p class="mod-description">Алхимическая магия, исследование аспектов и создание тауматургических устройств.</p>
+                        </div>
+                    </div>
+                    
+                    <h3>Начало исследований</h3>
+                    <p>Для старта в Thaumcraft:</p>
+                    <ol>
+                        <li>Создать волшебную палочку и стол исследований</li>
+                        <li>Начать сканирование объектов для получения аспектов</li>
+                        <li>Создать аркане верстак</li>
+                        <li>Начать исследования в тауманомиконе</li>
+                    </ol>
+                </div>
+            </div>
+            
+            <div id="utility-mods" class="tab-content">
+                <h1>Утилиты и вспомогательные моды</h1>
+                <p>Моды, улучшающие игровой процесс и добавляющие полезные функции.</p>
+                
+                <div class="mod-card">
+                    <div class="mod-title">Just Enough Items (JEI)</div>
+                    <div class="mod-info">
+                        <div class="mod-image">
+                            <img src="/api/placeholder/80/80" alt="JEI" />
+                        </div>
+                        <div class="mod-details">
+                            <p class="mod-description">Система просмотра рецептов и управления предметами.</p>
+                        </div>
+                    </div>
+                    
+                    <h3>Использование JEI</h3>
+                    <ul>
+                        <li><code>R</code> при наведении на предмет - просмотр рецепта создания</li>
+                        <li><code>U</code> при наведении на предмет - просмотр применения предмета</li>
+                        <li>Поиск предметов в строке внизу интерфейса</li>
+                    </ul>
+                </div>
+                
+                <div class="mod-card">
+                    <div class="mod-title">Journey Map</div>
+                    <div class="mod-info">
+                        <div class="mod-image">
+                            <img src="/api/placeholder/80/80" alt="Journey Map" />
+                        </div>
+                        <div class="mod-details">
+                            <p class="mod-description">Продвинутая карта мира с функциями отметок и радара.</p>
+                        </div>
+                    </div>
+                    
+                    <h3>Возможности карты</h3>
+                    <ul>
+                        <li>Полноэкранная карта (клавиша <code>J</code>)</li>
+                        <li>Миникарта (настройка размера в меню карты)</li>
+                        <li>Установка вейпоинтов (точек интереса)</li>
+                        <li>Отслеживание мобов и игроков</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div id="installation" class="tab-content">
+                <h1>Установка модпака</h1>
+                <p>Подробная инструкция по установке и настройке модпака.</p>
+                
+                <h2>Системные требования</h2>
+                <ul>
+                    <li><strong>Процессор:</strong> Intel Core i5 / AMD Ryzen 3 или выше</li>
+                    <li><strong>Оперативная память:</strong> Минимум 6 ГБ (рекомендуется 8 ГБ или больше)</li>
+                    <li><strong>Видеокарта:</strong> С поддержкой OpenGL 4.5</li>
+                    <li><strong>Место на диске:</strong> Минимум 2 ГБ свободного места</li>
+                </ul>
+                
+                <h2>Установка через CurseForge</h2>
+                <ol>
+                    <li>Скачайте и установите лаунчер CurseForge</li>
+                    <li>В разделе Minecraft выберите "Browse Modpacks"</li>
+                    <li>Найдите наш модпак по названию</li>
+                    <li>Нажмите "Install" и дождитесь завершения загрузки</li>
+                </ol>
+                
+                <h2>Ручная установка</h2>
+                <ol>
+                    <li>Установите Forge для Minecraft нужной версии</li>
+                    <li>Скачайте ZIP-архив с модпаком</li>
+                    <li>Распакуйте содержимое в папку .minecraft/mods</li>
+                    <li>Запустите Minecraft с профилем Forge</li>
+                </ol>
+                
+                <h2>Частые проблемы</h2>
+                <ul>
+                    <li><strong>Не хватает памяти:</strong> Увеличьте выделенную память Java в настройках лаунчера</li>
+                    <li><strong>Конфликты модов:</strong> Убедитесь, что не установлены дополнительные моды</li>
+                    <li><strong>Черный экран:</strong> Проверьте совместимость видеодрайверов</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    
+    <footer class="container">
+        <p>© 2025 Вики для Модпака Minecraft. Все права защищены.</p>
+        <p>Minecraft принадлежит Mojang Studios.</p>
+    </footer>
+    
+    <script>
+        function openTab(tabName) {
+            // Скрываем все вкладки
+            const tabContents = document.getElementsByClassName("tab-content");
+            for (let i = 0; i < tabContents.length; i++) {
+                tabContents[i].classList.remove("active");
+            }
+            
+            // Убираем активный класс у кнопок
+            const tabButtons = document.getElementsByClassName("tab-btn");
+            for (let i = 0; i < tabButtons.length; i++) {
+                tabButtons[i].classList.remove("active");
+            }
+            
+            // Показываем выбранную вкладку и делаем кнопку активной
+            document.getElementById(tabName).classList.add("active");
+            
+            // Находим соответствующую кнопку и делаем её активной
+            const buttons = document.querySelectorAll('.tab-btn');
+            buttons.forEach(button => {
+                if (button.getAttribute('onclick').includes(tabName)) {
+                    button.classList.add('active');
+                }
+            });
+        }
+    </script>
+</body>
+</html>
