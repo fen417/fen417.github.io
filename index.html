@@ -1377,12 +1377,17 @@
             }
             
             // Show selected tab
-            document.getElementById(tabName).classList.add("active");
+            const selectedTab = document.getElementById(tabName);
+            if (selectedTab) {
+                selectedTab.classList.add("active");
+            }
             
             // Add active class to clicked button
             for (let i = 0; i < tabButtons.length; i++) {
-                if (tabButtons[i].getAttribute("onclick") === `openTab('${tabName}')`) {
+                const onclickAttr = tabButtons[i].getAttribute("onclick");
+                if (onclickAttr && onclickAttr.includes(`'${tabName}'`)) {
                     tabButtons[i].classList.add("active");
+                    break;
                 }
             }
             
