@@ -17,6 +17,7 @@
             color: #e0e0e0;
             line-height: 1.6;
             overflow-x: hidden;
+            padding-top: 100px;
         }
         
         /* Animated background particles */
@@ -64,9 +65,11 @@
             margin-bottom: 40px;
             border-radius: 20px;
             box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-            position: sticky;
-            top: 20px;
-            z-index: 100;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
         }
         
         .header-content {
@@ -74,6 +77,8 @@
             align-items: center;
             justify-content: space-between;
             padding: 0 40px;
+            max-width: 1400px;
+            margin: 0 auto;
         }
         
         .logo {
@@ -418,7 +423,7 @@
     <div class="bg-particles" id="particles"></div>
     
     <header>
-        <div class="container header-content">
+        <div class="header-content">
             <div class="logo">Dawn of Larston Forge Server 1.20.1</div>
         </div>
     </header>
@@ -1363,6 +1368,11 @@
         
         createParticles();
         
+        // Отдельная функция для переключения вкладок с кнопок
+        function switchToTab(tabName) {
+            openTab(tabName);
+        }
+        
         function openTab(tabName) {
             // Hide all tabs
             const tabContents = document.getElementsByClassName("tab-content");
@@ -1382,7 +1392,7 @@
                 selectedTab.classList.add("active");
             }
             
-            // Add active class to clicked button
+            // Add active class to clicked button in navigation
             for (let i = 0; i < tabButtons.length; i++) {
                 const onclickAttr = tabButtons[i].getAttribute("onclick");
                 if (onclickAttr && onclickAttr.includes(`'${tabName}'`)) {
