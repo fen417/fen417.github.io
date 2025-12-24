@@ -9,80 +9,154 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
         
         body {
-            background-color: #121212;
-            color: #eaeaea;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 100%);
+            color: #e0e0e0;
             line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        /* Animated background particles */
+        .bg-particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+        }
+        
+        .particle {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: rgba(76, 175, 80, 0.3);
+            border-radius: 50%;
+            animation: float 20s infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0) translateX(0); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(-100vh) translateX(100px); opacity: 0; }
         }
         
         .container {
-            max-width: 1300px;
+            max-width: 1400px;
             margin: 0 auto;
             padding: 20px;
+            position: relative;
+            z-index: 1;
         }
         
+        /* Header with glassmorphism */
         header {
-            background-color: #1e1e1e;
-            padding: 20px 0;
-            margin-bottom: 30px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+            background: rgba(30, 30, 46, 0.7);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(76, 175, 80, 0.1);
+            padding: 25px 0;
+            margin-bottom: 40px;
+            border-radius: 20px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            position: sticky;
+            top: 20px;
+            z-index: 100;
         }
         
         .header-content {
             display: flex;
             align-items: center;
             justify-content: space-between;
+            padding: 0 40px;
         }
         
         .logo {
-            font-size: 24px;
-            font-weight: bold;
-            color: #4CAF50;
+            font-size: 28px;
+            font-weight: 800;
+            background: linear-gradient(135deg, #4CAF50 0%, #81C784 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -0.5px;
+            text-shadow: 0 0 30px rgba(76, 175, 80, 0.3);
         }
         
+        /* Modern tabs */
         .tab-container {
-            background-color: #1e1e1e;
-            border-radius: 8px;
+            background: rgba(30, 30, 46, 0.6);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(76, 175, 80, 0.1);
+            border-radius: 20px;
             overflow: hidden;
-            margin-bottom: 30px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-bottom: 40px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
         }
         
         .tabs {
             display: flex;
             overflow-x: auto;
-            border-bottom: 2px solid #2e2e2e;
-            background-color: #252525;
+            background: rgba(20, 20, 30, 0.4);
+            padding: 10px;
+            gap: 8px;
+            scrollbar-width: none;
+        }
+        
+        .tabs::-webkit-scrollbar {
+            display: none;
         }
         
         .tab-btn {
-            padding: 15px 25px;
-            background: none;
-            border: none;
+            padding: 14px 28px;
+            background: rgba(40, 40, 60, 0.5);
+            border: 1px solid rgba(76, 175, 80, 0.2);
+            border-radius: 12px;
             cursor: pointer;
             color: #aaa;
-            font-size: 16px;
-            font-weight: 500;
-            transition: all 0.3s ease;
-            min-width: max-content;
+            font-size: 15px;
+            font-weight: 600;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            white-space: nowrap;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .tab-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(76, 175, 80, 0.2), transparent);
+            transition: left 0.5s;
+        }
+        
+        .tab-btn:hover::before {
+            left: 100%;
         }
         
         .tab-btn:hover {
-            background-color: #333;
+            background: rgba(60, 60, 80, 0.7);
             color: #fff;
+            transform: translateY(-2px);
+            border-color: rgba(76, 175, 80, 0.4);
         }
         
         .tab-btn.active {
-            background-color: #4CAF50;
+            background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
             color: white;
+            border-color: #4CAF50;
+            box-shadow: 0 4px 20px rgba(76, 175, 80, 0.4);
         }
         
         .tab-content {
             display: none;
-            padding: 25px;
+            padding: 40px;
             animation: fadeIn 0.5s ease;
         }
         
@@ -91,50 +165,118 @@
         }
         
         @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
         
-        h1, h2, h3 {
-            margin-bottom: 15px;
+        h1 {
+            font-size: 42px;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #4CAF50 0%, #81C784 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 800;
+            letter-spacing: -1px;
+        }
+        
+        h2 {
+            font-size: 32px;
+            margin: 30px 0 20px;
             color: #4CAF50;
+            font-weight: 700;
+        }
+        
+        h3 {
+            font-size: 22px;
+            margin: 20px 0 12px;
+            color: #66BB6A;
+            font-weight: 600;
         }
         
         p {
-            margin-bottom: 15px;
+            margin-bottom: 16px;
+            color: #c0c0c0;
+            line-height: 1.7;
         }
         
+        /* Modern card design */
         .mod-card {
-            background-color: #252525;
-            border-radius: 8px;
-            padding: 20px;
-            margin-bottom: 20px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-            transition: transform 0.3s ease;
+            background: rgba(30, 30, 46, 0.6);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(76, 175, 80, 0.15);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 24px;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .mod-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(76, 175, 80, 0.1) 0%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.4s;
+        }
+        
+        .mod-card:hover::before {
+            opacity: 1;
         }
         
         .mod-card:hover {
-            transform: translateY(-5px);
+            transform: translateY(-8px);
+            border-color: rgba(76, 175, 80, 0.4);
+            box-shadow: 0 20px 60px rgba(76, 175, 80, 0.2);
         }
         
         .mod-title {
-            font-size: 20px;
-            margin-bottom: 10px;
+            font-size: 24px;
+            margin-bottom: 16px;
             color: #4CAF50;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .mod-title::before {
+            content: '▸';
+            color: #4CAF50;
+            font-size: 28px;
         }
         
         .mod-info {
             display: flex;
-            margin-bottom: 15px;
+            gap: 20px;
+            margin-bottom: 20px;
         }
         
         .mod-image {
-            width: 80px;
-            height: 80px;
-            background-color: #333;
-            border-radius: 4px;
-            margin-right: 15px;
+            width: 100px;
+            height: 100px;
+            background: rgba(40, 40, 60, 0.6);
+            border-radius: 16px;
+            flex-shrink: 0;
             overflow: hidden;
+            border: 2px solid rgba(76, 175, 80, 0.2);
+            transition: all 0.3s;
+        }
+        
+        .mod-card:hover .mod-image {
+            transform: scale(1.05);
+            border-color: rgba(76, 175, 80, 0.5);
+            box-shadow: 0 0 20px rgba(76, 175, 80, 0.3);
+        }
+        
+        .mod-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
         
         .mod-details {
@@ -142,95 +284,139 @@
         }
         
         .mod-description {
-            color: #ccc;
+            color: #b0b0b0;
+            line-height: 1.6;
         }
-		/* Дополнительные стили для новых элементов */
-.features-section {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 20px;
-    margin-bottom: 30px;
-}
-
-.features-section .mod-card {
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.features-section .mod-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-}
-
-.view-more-btn {
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    padding: 8px 16px;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    font-size: 14px;
-    align-self: flex-end;
-    margin-top: auto;
-}
-
-.view-more-btn:hover {
-    background-color: #3e8e41;
-}
-
-/* Для кнопок "Подробнее" на карточках */
-.mod-card {
-    display: flex;
-    flex-direction: column;
-}
-
-.mod-card button {
-    margin-top: 10px;
-    align-self: flex-start;
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    padding: 8px 16px;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-.mod-card button:hover {
-    background-color: #3e8e41;
-}
         
+        /* Features grid */
+        .features-section {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 24px;
+            margin-bottom: 40px;
+        }
+        
+        .features-section .mod-card {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        /* Buttons */
+        .view-more-btn, .mod-card button {
+            background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 12px;
+            cursor: pointer;
+            font-size: 15px;
+            font-weight: 600;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 4px 15px rgba(76, 175, 80, 0.3);
+            margin-top: auto;
+        }
+        
+        .view-more-btn:hover, .mod-card button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 25px rgba(76, 175, 80, 0.5);
+            background: linear-gradient(135deg, #45a049 0%, #4CAF50 100%);
+        }
+        
+        .view-more-btn:active, .mod-card button:active {
+            transform: translateY(0);
+        }
+        
+        /* Code blocks */
+        code {
+            background: rgba(76, 175, 80, 0.15);
+            color: #81C784;
+            padding: 4px 10px;
+            border-radius: 8px;
+            font-family: 'Fira Code', 'Courier New', monospace;
+            font-size: 14px;
+            border: 1px solid rgba(76, 175, 80, 0.2);
+        }
+        
+        /* Lists */
+        ul, ol {
+            margin-left: 20px;
+            margin-bottom: 20px;
+            color: #b0b0b0;
+        }
+        
+        li {
+            margin-bottom: 10px;
+            line-height: 1.6;
+        }
+        
+        strong {
+            color: #81C784;
+            font-weight: 600;
+        }
+        
+        /* Footer */
         footer {
-            margin-top: 40px;
-            padding: 20px 0;
+            margin-top: 60px;
+            padding: 30px 0;
             text-align: center;
-            background-color: #1a1a1a;
+            background: rgba(20, 20, 30, 0.6);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            border: 1px solid rgba(76, 175, 80, 0.1);
             color: #777;
             font-size: 14px;
         }
         
-        code {
-            background-color: #2a2a2a;
-            padding: 2px 5px;
-            border-radius: 4px;
-            font-family: 'Courier New', monospace;
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
         }
         
-        ul, ol {
-            margin-left: 20px;
-            margin-bottom: 15px;
+        ::-webkit-scrollbar-track {
+            background: rgba(20, 20, 30, 0.5);
         }
         
-        img {
-            max-width: 100%;
-            border-radius: 4px;
+        ::-webkit-scrollbar-thumb {
+            background: rgba(76, 175, 80, 0.5);
+            border-radius: 5px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(76, 175, 80, 0.7);
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header-content {
+                padding: 0 20px;
+            }
+            
+            .logo {
+                font-size: 22px;
+            }
+            
+            h1 {
+                font-size: 32px;
+            }
+            
+            .tab-content {
+                padding: 20px;
+            }
+            
+            .features-section {
+                grid-template-columns: 1fr;
+            }
+            
+            .mod-info {
+                flex-direction: column;
+            }
         }
     </style>
 </head>
 <body>
+    <div class="bg-particles" id="particles"></div>
+    
     <header>
         <div class="container header-content">
             <div class="logo">Dawn of Larston Forge Server 1.20.1</div>
@@ -250,96 +436,96 @@
                 <button class="tab-btn" onclick="openTab('utility-mods')">Утилиты</button>
             </div>
             
-<div id="home" class="tab-content active">
-    <h1>Добро пожаловать в вики нашего сервера!</h1>
-    <p>Здесь вы найдете подробные руководства по самым популярным модам, входящим в состав пакета, советы по использованию и решения распространенных проблем.</p>
-    
-    <h2>О сервере</h2>
-    <p>Наш сервер создан для тех, кто жаждет глубокого и разнообразного игрового опыта. Мы тщательно отобрали и настроили моды, чтобы предложить вам уникальный игровой мир с множеством возможностей. В мире сервера прописан глубокий лор, раскрывающий себя в описании квестов и диалогах с NPC.</p>
-    
-    <div class="features-section">
-        <div class="mod-card">
-            <div class="mod-title">Эпические сражения</div>
-            <div class="mod-info">
-                <div class="mod-details">
-                    <p class="mod-description">Наш модпак предлагает десятки уникальных боссов с разнообразными механиками и способностями. Каждый босс требует особого подхода и стратегии, что делает каждую битву незабываемым испытанием вашего мастерства и подготовки.</p>
+            <div id="home" class="tab-content active">
+                <h1>Добро пожаловать в вики нашего сервера!</h1>
+                <p>Здесь вы найдете подробные руководства по самым популярным модам, входящим в состав пакета, советы по использованию и решения распространенных проблем.</p>
+                
+                <h2>О сервере</h2>
+                <p>Наш сервер создан для тех, кто жаждет глубокого и разнообразного игрового опыта. Мы тщательно отобрали и настроили моды, чтобы предложить вам уникальный игровой мир с множеством возможностей. В мире сервера прописан глубокий лор, раскрывающий себя в описании квестов и диалогах с NPC.</p>
+                
+                <div class="features-section">
+                    <div class="mod-card">
+                        <div class="mod-title">Эпические сражения</div>
+                        <div class="mod-info">
+                            <div class="mod-details">
+                                <p class="mod-description">Наш модпак предлагает десятки уникальных боссов с разнообразными механиками и способностями. Каждый босс требует особого подхода и стратегии, что делает каждую битву незабываемым испытанием вашего мастерства и подготовки.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mod-card">
+                        <div class="mod-title">Исследование подземелий</div>
+                        <div class="mod-info">
+                            <div class="mod-details">
+                                <p class="mod-description">Погрузитесь в исследование многочисленных подземелий разной сложности. Каждое подземелье наполнено уникальными монстрами, головоломками, ловушками и сокровищами, которые ждут только самых храбрых искателей приключений.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mod-card">
+                        <div class="mod-title">Магические системы</div>
+                        <div class="mod-info">
+                            <div class="mod-details">
+                                <p class="mod-description">Изучайте различные школы магии, создавайте могущественные заклинания и ритуалы. Каждая магическая система предлагает свой собственный стиль игры с уникальными заклинаниями, артефактами и квестами.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mod-card">
+                        <div class="mod-title">Домашний декор и строительство</div>
+                        <div class="mod-info">
+                            <div class="mod-details">
+                                <p class="mod-description">Создавайте уютные дома и впечатляющие базы с сотнями новых декоративных блоков, мебели и элементов интерьера. От простых функциональных предметов до изысканных украшений — вы найдёте всё необходимое для создания идеального дома.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mod-card">
+                        <div class="mod-title">Мистические артефакты</div>
+                        <div class="mod-info">
+                            <div class="mod-details">
+                                <p class="mod-description">Собирайте и улучшайте редкие артефакты, которые наделят вас особыми способностями. Каждый артефакт можно модифицировать и улучшать, создавая уникальные комбинации эффектов, соответствующие вашему стилю игры.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mod-card">
+                        <div class="mod-title">Оружейное разнообразие</div>
+                        <div class="mod-info">
+                            <div class="mod-details">
+                                <p class="mod-description">Насладитесь обновленной боевой механикой с десятками видов нового холодного оружия. Мечи, топоры, кинжалы, копья и множество других типов оружия, каждое с уникальными свойствами, позволят вам выбрать идеальный стиль боя.</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </div>
-        
-        <div class="mod-card">
-            <div class="mod-title">Исследование подземелий</div>
-            <div class="mod-info">
-                <div class="mod-details">
-                    <p class="mod-description">Погрузитесь в исследование многочисленных подземелий разной сложности. Каждое подземелье наполнено уникальными монстрами, головоломками, ловушками и сокровищами, которые ждут только самых храбрых искателей приключений.</p>
-                </div>
-            </div>
-        </div>
-        
-        <div class="mod-card">
-            <div class="mod-title">Магические системы</div>
-            <div class="mod-info">
-                <div class="mod-details">
-                    <p class="mod-description">Изучайте различные школы магии, создавайте могущественные заклинания и ритуалы. Каждая магическая система предлагает свой собственный стиль игры с уникальными заклинаниями, артефактами и квестами.</p>
-                </div>
-            </div>
-        </div>
-        
-        <div class="mod-card">
-            <div class="mod-title">Домашний декор и строительство</div>
-            <div class="mod-info">
-                <div class="mod-details">
-                    <p class="mod-description">Создавайте уютные дома и впечатляющие базы с сотнями новых декоративных блоков, мебели и элементов интерьера. От простых функциональных предметов до изысканных украшений — вы найдёте всё необходимое для создания идеального дома.</p>
-                </div>
-            </div>
-        </div>
-        
-        <div class="mod-card">
-            <div class="mod-title">Мистические артефакты</div>
-            <div class="mod-info">
-                <div class="mod-details">
-                    <p class="mod-description">Собирайте и улучшайте редкие артефакты, которые наделят вас особыми способностями. Каждый артефакт можно модифицировать и улучшать, создавая уникальные комбинации эффектов, соответствующие вашему стилю игры.</p>
-                </div>
-            </div>
-        </div>
-        
-        <div class="mod-card">
-            <div class="mod-title">Оружейное разнообразие</div>
-            <div class="mod-info">
-                <div class="mod-details">
-                    <p class="mod-description">Насладитесь обновленной боевой механикой с десятками видов нового холодного оружия. Мечи, топоры, кинжалы, копья и множество других типов оружия, каждое с уникальными свойствами, позволят вам выбрать идеальный стиль боя.</p>
-                </div>
-            </div>
-        </div>
-    </div>
 
-    <h2>Популярные моды</h2>
-    <div class="mod-card">
-        <div class="mod-title">Iron Spells and Spellbooks</div>
-        <div class="mod-info">
-            <div class="mod-image">
-                <img src="images/isasb.png" alt="Iron Spells and Spellbooks" />
+                <h2>Популярные моды</h2>
+                <div class="mod-card">
+                    <div class="mod-title">Iron Spells and Spellbooks</div>
+                    <div class="mod-info">
+                        <div class="mod-image">
+                            <img src="images/isasb.png" alt="Iron Spells and Spellbooks" />
+                        </div>
+                        <div class="mod-details">
+                            <p class="mod-description">Модифицированная версия мода, добавляющая множество заклинаний разных школ магии. В нашей модификации добавлены новые уникальные заклинания.</p>
+                        </div>
+                    </div>
+                    <button onclick="openTab('magic-mods')" class="view-more-btn">Подробнее</button>
+                </div>
+                
+                <div class="mod-card">
+                    <div class="mod-title">Dawn of Larston: Time Paradox</div>
+                    <div class="mod-info">
+                        <div class="mod-image">
+                            <img src="/images/dol.png" alt="Dawn of Larston: Time Paradox" />
+                        </div>
+                        <div class="mod-details">
+                            <p class="mod-description">Самописный мод, добавляющий новое измерение и могущественного босса. Эпическое испытание для самых смелых игроков.</p>
+                        </div>
+                    </div>
+                    <button onclick="openTab('boss-mods')" class="view-more-btn">Подробнее</button>
+                </div>
             </div>
-            <div class="mod-details">
-                <p class="mod-description">Модифицированная версия мода, добавляющая множество заклинаний разных школ магии. В нашей модификации добавлены новые уникальные заклинания.</p>
-            </div>
-        </div>
-        <button onclick="openTab('magic-mods')" class="view-more-btn">Подробнее</button>
-    </div>
-    
-    <div class="mod-card">
-        <div class="mod-title">Dawn of Larston: Time Paradox</div>
-        <div class="mod-info">
-            <div class="mod-image">
-                <img src="/images/dol.png" alt="Dawn of Larston: Time Paradox" />
-            </div>
-            <div class="mod-details">
-                <p class="mod-description">Самописный мод, добавляющий новое измерение и могущественного босса. Эпическое испытание для самых смелых игроков.</p>
-            </div>
-        </div>
-        <button onclick="openTab('boss-mods')" class="view-more-btn">Подробнее</button>
-    </div>
-</div>
             
             <div id="tech-mods" class="tab-content">
                 <h1>Общие моды</h1>
@@ -440,7 +626,7 @@
                     </div>
                     
                     <h3>Система титулов</h3>
-                    <p>Мод позволяет игрокам получать и отображать уникальные титулы. </p>
+                    <p>Мод позволяет игрокам получать и отображать уникальные титулы.</p>
                     
                     <h3>Получение титулов</h3>
                     <p>Титулы можно получить различными способами:</p>
@@ -458,65 +644,65 @@
                 <p>Здесь представлены все магические моды пакета и руководства по их использованию.</p>
                 
                 <div class="mod-card">
-    <div class="mod-title">Iron's Spells 'n Spellbooks</div>
-    <div class="mod-info">
-        <div class="mod-image">
-            <img src="/images/isasb.png" alt="Iron's Spells 'n Spellbooks" />
-        </div>
-        <div class="mod-details">
-            <p class="mod-description">
-                Iron's Spells 'n Spellbooks — это мод, вдохновлённый классическими RPG, который добавляет в Minecraft продвинутую систему заклинаний, магических предметов, врагов, структур и боссов. Он предлагает полноценную магическую прогрессию, прокачку, исследования и сражения. В этой модифицированной версии также добавлена уникальная авторская школа магии.
-            </p>
-        </div>
-    </div>
-    
-    <h3>Основные особенности</h3>
-    <ul>
-        <li>Более 95 уникальных и улучшаемых заклинаний</li>
-        <li>2 мощных босса-мага</li>
-        <li>8 новых враждебных и дружественных существ</li>
-        <li>11 комплектов магической брони</li>
-        <li>10 случайно генерируемых структур и подземелий</li>
-        <li>Система чар для магического оружия и экипировки</li>
-        <li>Гибкая настройка геймплея и баланса</li>
-        <li>Совместимость с модами JEI, Apotheosis, Better Combat, Tetra и другими</li>
-    </ul>
-    
-    <h3>Начало пути мага</h3>
-    <p>Чтобы стать магом, выполните следующие шаги:</p>
-    <ol>
-        <li>Создайте или найдите <strong>Arcane Workbench</strong> (Магический верстак)</li>
-        <li>Создайте свою первую <strong>книгу заклинаний</strong> (Spellbook)</li>
-        <li>Получите <strong>свитки заклинаний</strong> (Spell Scrolls) из сундуков или у торговцев</li>
-    </ol>
-    
-    <h3>Школы магии</h3>
-    <ul>
-        <li><strong>Огненная магия (Fire)</strong> — урон и эффект поджигания</li>
-        <li><strong>Ледяная магия (Ice)</strong> — замедление и контроль противников</li>
-        <li><strong>Магия природы (Nature)</strong> — защита, лечение и работа с ядами</li>
-        <li><strong>Магия шторма (Storm)</strong> — мобильность, рывки, воздушные атаки</li>
-        <li><strong>Кровавая магия (Blood)</strong> — жертвы, восстановление через урон</li>
-        <li><strong>Святая магия (Holy)</strong> — поддержка, исцеление и священные заклинания</li>
-        <li><strong>Магия порчи (Corruption)</strong> — ослабление, болезни и яд</li>
-        <li><strong>Запретная магия (Eldritch)</strong> — призывы, древние знания и тьма</li>
-    </ul>
-    
-    <h3>Эксклюзивная школа</h3>
-    <p>В данной версии мода представлена уникальная, самописная школа магии:</p>
-    <ul>
-        <li><strong>Школа времени</strong> — позволяет манипулировать временем: замедлять, ускорять и применять временные искажения</li>
-    </ul>
-    
-    <h3>Улучшение и развитие</h3>
-    <p>Развивайте свои магические навыки и усиливайте заклинания:</p>
-    <ul>
-        <li>Улучшайте заклинания на магическом верстаке</li>
-        <li>Собирайте редкие руны и артефакты для усиления</li>
-        <li>Создавайте мощные комбинации заклинаний и эффектов</li>
-    </ul>
-</div>
-</div>
+                    <div class="mod-title">Iron's Spells 'n Spellbooks</div>
+                    <div class="mod-info">
+                        <div class="mod-image">
+                            <img src="/images/isasb.png" alt="Iron's Spells 'n Spellbooks" />
+                        </div>
+                        <div class="mod-details">
+                            <p class="mod-description">
+                                Iron's Spells 'n Spellbooks — это мод, вдохновлённый классическими RPG, который добавляет в Minecraft продвинутую систему заклинаний, магических предметов, врагов, структур и боссов. Он предлагает полноценную магическую прогрессию, прокачку, исследования и сражения. В этой модифицированной версии также добавлена уникальная авторская школа магии.
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <h3>Основные особенности</h3>
+                    <ul>
+                        <li>Более 95 уникальных и улучшаемых заклинаний</li>
+                        <li>2 мощных босса-мага</li>
+                        <li>8 новых враждебных и дружественных существ</li>
+                        <li>11 комплектов магической брони</li>
+                        <li>10 случайно генерируемых структур и подземелий</li>
+                        <li>Система чар для магического оружия и экипировки</li>
+                        <li>Гибкая настройка геймплея и баланса</li>
+                        <li>Совместимость с модами JEI, Apotheosis, Better Combat, Tetra и другими</li>
+                    </ul>
+                    
+                    <h3>Начало пути мага</h3>
+                    <p>Чтобы стать магом, выполните следующие шаги:</p>
+                    <ol>
+                        <li>Создайте или найдите <strong>Arcane Workbench</strong> (Магический верстак)</li>
+                        <li>Создайте свою первую <strong>книгу заклинаний</strong> (Spellbook)</li>
+                        <li>Получите <strong>свитки заклинаний</strong> (Spell Scrolls) из сундуков или у торговцев</li>
+                    </ol>
+                    
+                    <h3>Школы магии</h3>
+                    <ul>
+                        <li><strong>Огненная магия (Fire)</strong> — урон и эффект поджигания</li>
+                        <li><strong>Ледяная магия (Ice)</strong> — замедление и контроль противников</li>
+                        <li><strong>Магия природы (Nature)</strong> — защита, лечение и работа с ядами</li>
+                        <li><strong>Магия шторма (Storm)</strong> — мобильность, рывки, воздушные атаки</li>
+                        <li><strong>Кровавая магия (Blood)</strong> — жертвы, восстановление через урон</li>
+                        <li><strong>Святая магия (Holy)</strong> — поддержка, исцеление и священные заклинания</li>
+                        <li><strong>Магия порчи (Corruption)</strong> — ослабление, болезни и яд</li>
+                        <li><strong>Запретная магия (Eldritch)</strong> — призывы, древние знания и тьма</li>
+                    </ul>
+                    
+                    <h3>Эксклюзивная школа</h3>
+                    <p>В данной версии мода представлена уникальная, самописная школа магии:</p>
+                    <ul>
+                        <li><strong>Школа времени</strong> — позволяет манипулировать временем: замедлять, ускорять и применять временные искажения</li>
+                    </ul>
+                    
+                    <h3>Улучшение и развитие</h3>
+                    <p>Развивайте свои магические навыки и усиливайте заклинания:</p>
+                    <ul>
+                        <li>Улучшайте заклинания на магическом верстаке</li>
+                        <li>Собирайте редкие руны и артефакты для усиления</li>
+                        <li>Создавайте мощные комбинации заклинаний и эффектов</li>
+                    </ul>
+                </div>
+            </div>
             
             <div id="world-mods" class="tab-content">
                 <h1>Исследование мира</h1>
@@ -634,9 +820,7 @@
                         <li>Обновлённый лут в сундуках подземелий, включая новые зачарования и предметы.</li>
                         <li>Добавлены новые зачарования, такие как «Антидот», «Проклятие проводимости», «Призрачный» и «Гравитация», каждое с уникальными эффектами и ограничениями.</li>
                     </ul>
-                    
                 </div>
-                
                 
                 <div class="mod-card">
                     <div class="mod-title">End Remastered</div>
@@ -817,9 +1001,7 @@
                         <li><strong>Восстановление здоровья при блоке</strong>: восстановление здоровья при успешном блокировании атаки.</li>
                         <li><strong>Восстановление здоровья при ударе</strong>: восстановление здоровья при атаке противника.</li>
                     </ul>
-                    
                 </div>
-                
                 
                 <div class="mod-card">
                     <div class="mod-title">Infernal Mobs</div>
@@ -911,7 +1093,6 @@
                         <li><strong>Временной Меч</strong> — позволяет телепортироваться назад во времени, избегая опасности или застигнув врагов врасплох.</li>
                     </ul>
                 </div>
-            
                 
                 <div class="mod-card">
                     <div class="mod-title">Bosses of Mass Destruction</div>
@@ -942,7 +1123,6 @@
                     </ul>
                 </div>
                 
-                
                 <div class="mod-card">
                     <div class="mod-title">L'Ender Cataclysm</div>
                     <div class="mod-info">
@@ -972,7 +1152,6 @@
                         <li><strong>Burning Arena</strong> — арена в Нижнем мире, место обитания Netherite Monstrosity.</li>
                     </ul>
                 </div>
-                
                 
                 <div class="mod-card">
                     <div class="mod-title">Aquamirae</div>
@@ -1022,7 +1201,6 @@
                     </ul>
                 </div>
             </div>
-                
             
             <div id="utility-mods" class="tab-content">
                 <h1>Утилиты и вспомогательные моды</h1>
@@ -1148,11 +1326,10 @@
                 <h2>Установка при помощи лаунчера</h2>
                 <ol>
                     <li>Скачайте и установите последнюю версию лаунчера Dawn of Larston по ссылке: https://github.com/fen417/Dawn-of-Larston_Launcher/releases</li>
-                    <li>Распакуйте архив в любую удобную папку (обратите внимание, что клиет игры буде установлен в ту же папку) </li>
+                    <li>Распакуйте архив в любую удобную папку (обратите внимание, что клиет игры буде установлен в ту же папку)</li>
                     <li>Запустите MinecraftLauncher.exe, после первого запуска лаунчер сам создаст ярлык на рабочем столе</li>
                     <li>Нажмите "Установить игру" и дождитесь завершения загрузки</li>
                 </ol>
-                
                 
                 <h2>Частые проблемы</h2>
                 <ul>
@@ -1169,30 +1346,49 @@
     </footer>
     
     <script>
-        function openTab(tabName) {
-    // Скрываем все вкладки
-    const tabContents = document.getElementsByClassName("tab-content");
-    for (let i = 0; i < tabContents.length; i++) {
-        tabContents[i].classList.remove("active");
-    }
-    
-    // Убираем активный класс у кнопок
-    const tabButtons = document.getElementsByClassName("tab-btn");
-    for (let i = 0; i < tabButtons.length; i++) {
-        tabButtons[i].classList.remove("active");
-    }
-    
-    // Показываем выбранную вкладку
-    document.getElementById(tabName).classList.add("active");
-    
-    // Добавляем активный класс нажатой кнопке
-    for (let i = 0; i < tabButtons.length; i++) {
-        if (tabButtons[i].getAttribute("onclick") === `openTab('${tabName}')`) {
-            tabButtons[i].classList.add("active");
+        // Create animated particles
+        function createParticles() {
+            const container = document.getElementById('particles');
+            const particleCount = 50;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 20 + 's';
+                particle.style.animationDuration = (Math.random() * 10 + 15) + 's';
+                container.appendChild(particle);
+            }
         }
-    }
-}
+        
+        createParticles();
+        
+        function openTab(tabName) {
+            // Hide all tabs
+            const tabContents = document.getElementsByClassName("tab-content");
+            for (let i = 0; i < tabContents.length; i++) {
+                tabContents[i].classList.remove("active");
+            }
+            
+            // Remove active class from buttons
+            const tabButtons = document.getElementsByClassName("tab-btn");
+            for (let i = 0; i < tabButtons.length; i++) {
+                tabButtons[i].classList.remove("active");
+            }
+            
+            // Show selected tab
+            document.getElementById(tabName).classList.add("active");
+            
+            // Add active class to clicked button
+            for (let i = 0; i < tabButtons.length; i++) {
+                if (tabButtons[i].getAttribute("onclick") === `openTab('${tabName}')`) {
+                    tabButtons[i].classList.add("active");
+                }
+            }
+            
+            // Scroll to top
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
     </script>
 </body>
-
-            
+</html>
