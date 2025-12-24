@@ -216,6 +216,14 @@
             position: relative;
             overflow: hidden;
         }
+        .mod-card-with-button {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .mod-card-with-button .view-more-btn {
+            align-self: flex-start;
+        }
         
         .mod-card::before {
             content: '';
@@ -503,6 +511,7 @@
                         </div>
                     </div>
                 </div>
+                
 
                 <h2>Популярные моды</h2>
                 <div class="mod-card">
@@ -1351,59 +1360,60 @@
     </footer>
     
     <script>
-        // Create animated particles
-        function createParticles() {
-            const container = document.getElementById('particles');
-            const particleCount = 50;
-            
-            for (let i = 0; i < particleCount; i++) {
-                const particle = document.createElement('div');
-                particle.className = 'particle';
-                particle.style.left = Math.random() * 100 + '%';
-                particle.style.animationDelay = Math.random() * 20 + 's';
-                particle.style.animationDuration = (Math.random() * 10 + 15) + 's';
-                container.appendChild(particle);
+    // Create animated particles
+    function createParticles() {
+        const container = document.getElementById('particles');
+        const particleCount = 50;
+        
+        for (let i = 0; i < particleCount; i++) {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            particle.style.left = Math.random() * 100 + '%';
+            particle.style.animationDelay = Math.random() * 20 + 's';
+            particle.style.animationDuration = (Math.random() * 10 + 15) + 's';
+            container.appendChild(particle);
+        }
+    }
+    
+    createParticles();
+    
+    function openTab(tabName, event) {
+        // Prevent event bubbling if event is passed
+        if (event) {
+            event.stopPropagation();
+            event.preventDefault();
+        }
+        
+        // Hide all tabs
+        const tabContents = document.getElementsByClassName("tab-content");
+        for (let i = 0; i < tabContents.length; i++) {
+            tabContents[i].classList.remove("active");
+        }
+        
+        // Remove active class from buttons
+        const tabButtons = document.getElementsByClassName("tab-btn");
+        for (let i = 0; i < tabButtons.length; i++) {
+            tabButtons[i].classList.remove("active");
+        }
+        
+        // Show selected tab
+        const selectedTab = document.getElementById(tabName);
+        if (selectedTab) {
+            selectedTab.classList.add("active");
+        }
+        
+        // Add active class to clicked button in navigation
+        for (let i = 0; i < tabButtons.length; i++) {
+            const onclickAttr = tabButtons[i].getAttribute("onclick");
+            if (onclickAttr && onclickAttr.includes(`'${tabName}'`)) {
+                tabButtons[i].classList.add("active");
+                break;
             }
         }
         
-        createParticles();
-        
-        // Отдельная функция для переключения вкладок с кнопок
-        function switchToTab(tabName) {
-            openTab(tabName);
-        }
-        
-        function openTab(tabName) {
-            // Hide all tabs
-            const tabContents = document.getElementsByClassName("tab-content");
-            for (let i = 0; i < tabContents.length; i++) {
-                tabContents[i].classList.remove("active");
-            }
-            
-            // Remove active class from buttons
-            const tabButtons = document.getElementsByClassName("tab-btn");
-            for (let i = 0; i < tabButtons.length; i++) {
-                tabButtons[i].classList.remove("active");
-            }
-            
-            // Show selected tab
-            const selectedTab = document.getElementById(tabName);
-            if (selectedTab) {
-                selectedTab.classList.add("active");
-            }
-            
-            // Add active class to clicked button in navigation
-            for (let i = 0; i < tabButtons.length; i++) {
-                const onclickAttr = tabButtons[i].getAttribute("onclick");
-                if (onclickAttr && onclickAttr.includes(`'${tabName}'`)) {
-                    tabButtons[i].classList.add("active");
-                    break;
-                }
-            }
-            
-            // Scroll to top
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
-    </script>
+        // Scroll to top
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+</script>
 </body>
 </html>
